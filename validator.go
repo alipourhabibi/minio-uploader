@@ -37,7 +37,6 @@ func ValidateFileSize(file io.Seeker, maxSize int64) error {
 }
 
 func ValidateFileType(file io.ReadSeeker, fileTypes ...string) (string, error) {
-	contentType := ""
 	// Validate the MIME type (only allow jpg and png)
 	fileHeader := make([]byte, 512) // Read the first 512 bytes for MIME type detection
 	_, err := file.Read(fileHeader)
@@ -56,7 +55,7 @@ func ValidateFileType(file io.ReadSeeker, fileTypes ...string) (string, error) {
 		return "", ErrInvalidFileType
 	}
 
-	return contentType, nil
+	return mimeType, nil
 }
 
 // Contains checks if a slice contains a specific string.
